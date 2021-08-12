@@ -27,19 +27,23 @@
     ul li {
         list-style-type: none;
     }
+
+    span {
+        text-decoration: underline;
+    }
 </style>
 
 <body>
     <div id="page">
         <h1>二手车买卖合同</h1>
         <div>
-            <p>合同编号: {{contractNo}}</p>
+            <p>合同编号: <span>{{t_contractNo}}</span></p>
             <br/>
-            <p>甲方(出卖人): {{firstParty}}</p>
-            <p>住所: {{firstPartyAddress}}         法定代表人: {{firstPartyLegalRepresentative}}</p>
-            <p>身份证号码: {{firstPartyIdNum}}</p>
-            <p>社会信用统一代码或工商登记注册号: {{firstPartyCreditCode}}</p>
-            <p>电话号码: {{firstPartyPhone}}</p>
+            <p>甲方(出卖人): <span>{{t_firstParty}}</span></p>
+            <p>住所: {{t_firstPartyAddress}}         法定代表人: {{t_firstPartyLegalRepresentative}}</p>
+            <p>身份证号码: {{t_firstPartyIdNum}}</p>
+            <p>社会信用统一代码或工商登记注册号: {{t_firstPartyCreditCode}}</p>
+            <p>电话号码: {{p_firstPartyPhone}}</p>
             <p>乙方(买受人):</p>
             <p>住所: 法定代表人:</p>
             <p>社会信用统一代码或工商登记注册号:</p>
@@ -60,18 +64,18 @@
             <h2>第二条 车辆价款、过户手续费及支付时间、方式</h2>
             <p>1.车辆价款及过户手续费</p>
             <p>
-                本车价款(不含税费或其它费用)为人民币: 元<br/>
-                (大写: 元)。
+                本车价款(不含税费或其它费用)为人民币:{{m_sellingPrice}}元<br/>
+                (大写:{{p_sellingPriceCn}}元)。
             </p>
-            <p>过户手续费为人民币: 元(大写: 元)。</p>
+            <p>过户手续费为人民币:{{m_transferCharges}}元(大写:{{p_transferChargesCn}}元)。</p>
             <p>2.支付时间、方式</p>
             <ul>
-                <li>{{isFullPay}}合同签订之日，一次性付清车款;</li>
-                <li>□合同签订之日，交付订金 元(大写: 元)，
-                    个工作日内付清余款 元(大写: 元);</li>
-                <li>{{isOtherPaymentType}}其它支付方式，如使用汽车消费贷款等支付方式以补充合
+                <li>{{b_isFullPay}} 合同签订之日，一次性付清车款;</li>
+                <li>{{b_isSpecialPay}} 合同签订之日，交付订金{{p_subscriptionMoney}}元(大写:{{p_subscriptionMoneyCn}}元)，
+                    个工作日内付清余款{{p_balancePayMoney}}元(大写:{{p_balancePayMoneyCn}}元);</li>
+                <li>{{b_isOtherPaymentType}}其它支付方式，如使用汽车消费贷款等支付方式以补充合
                     同形式另行约定。</li>
-                <li>{{isSecondPartyPayServiceCharge}}过户手续费由乙方承担;</li>
+                <li>{{b_isSecondPartyPayServiceCharge}}过户手续费由乙方承担;</li>
                 <li>□过户手续费由甲方承担;</li>
                 <li>□过户手续费由乙方承担 %，即 元(大写:
                     元);甲方承担 %，即 元(大写: 元)。</li>
@@ -130,12 +134,12 @@
         </div>
         <div class="chapter">
             <h2>第九条 其他约定</h2>
-            <p>
-                {{additionalProvisions}}
-            </p>
+            <span>
+                {{p_additionalProvisions}}
+            </span>
 
         </div>
-
+2
         <p>
             附件一:二手车技术状况表<br/>
             附件二:车辆相关凭证
@@ -159,7 +163,7 @@
         <p>户名: </p>
 
         <p>签订地点:</p>
-        <p>签订日期: 年 月 日</p>
+        <p>签订日期: <span>{{p_secondPartySignYear}}</span>年<span>{{p_secondPartySignMonth}}</span>月<span>{{p_secondPartySignDay}}</span>日</p>
     </div>
 </body>
 

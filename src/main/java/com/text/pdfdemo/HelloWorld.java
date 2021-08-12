@@ -1,26 +1,12 @@
 package com.text.pdfdemo;
 
-import com.itextpdf.text.Document;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.tool.xml.XMLWorkerFontProvider;
-import com.itextpdf.tool.xml.XMLWorkerHelper;
-import org.xhtmlrenderer.pdf.ITextFontResolver;
-import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HelloWorld {
@@ -31,23 +17,38 @@ public class HelloWorld {
 
     private static final Pattern REG_PATTERN = Pattern.compile("\\{\\{.*?}}");
 
+    static String paramDemo() {
+        return "{\n" +
+                "\"t_contractNo\": \"abx123xyz\",\n" +
+                "\"t_firstParty\": \"小方\",\n" +
+                "\"t_firstPartyAddress\": \"福建省厦门市湖里区\",\n" +
+                "\"t_firstPartyLegalRepresentative\": \"\",\n" +
+                "\"t_firstPartyIdNum\": \"35260811112222\",\n" +
+                "\"t_firstPartyCreditCode\": \"\",\n" +
+                "\"p_firstPartyPhone\": \"15605025957\",\n" +
+                "\"m_sellingPrice\": \"120000\",\n" +
+                "\"p_sellingPriceCn\": \"拾贰万元整\",\n" +
+                "\"m_transferCharges\": \"20000\",\n" +
+                "\"p_transferChargesCn\": \"贰万元整\",\n" +
+                "\"b_isFullPay\": \"0\",\n" +
+                "\"b_isSpecialPay\": \"1\",\n" +
+                "\"p_subscriptionMoney\": \"2000\",\n" +
+                "\"p_subscriptionMoneyCn\": \"贰仟元整\",\n" +
+                "\"p_balancePayMoney\": \"100\",\n" +
+                "\"p_balancePayMoneyCn\": \"壹佰元整\",\n" +
+                "\"b_isOtherPaymentType\": \"0\",\n" +
+                "\"p_additionalProvisions\": \"全车无泡水， 全车原版原漆这次影响最直接的，就是低洼之地的各种车，惨遭泡水大法。不过，并不是所有泡水的车都算是泡水车，也要分情况来看。第一种是浸水车，水深仅浸湿车轮，这种情况下其实伤害不是很大，如今汽车装配工艺相较十几年前来说，密封性水平相当高了，所以这种程度的泡水车影响不大。只需把车开到高地晾干即可，但如果你实在不放心，也可以去修理厂检查一遍底盘线路。\",\n" +
+                "\"b_isSecondPartyPayServiceCharge\": \"1\",\n" +
+                "\"p_secondPartySignYear\": \"2021\",\n" +
+                "\"p_secondPartySignMonth\": \"8\",\n" +
+                "  \"p_secondPartySignDay\": \"12\"\n" +
+                "}";
+    }
+
     public static void main(String[] args) throws DocumentException, IOException {
-        Map<String, String> pars = new HashMap<>();
-        pars.put("contractNo", "abc123xyz");
-        pars.put("firstParty", "小方");
-        pars.put("firstPartyAddress", "福建省厦门市湖里区创业北路9号");
-        pars.put("firstPartyLegalRepresentative", "没有人");
-        pars.put("additionalProvisions", "全车无泡水， 全车原版原漆这次影响最直接的，就是低洼之地的各种车，惨遭泡水大法。不过，并不是所有泡水的车都算是泡水车，也要分情况来看。\n" +
-                "\n" +
-                "第一种是浸水车，水深仅浸湿车轮，这种情况下其实伤害不是很大，如今汽车装配工艺相较十几年前来说，密封性水平相当高了，所以这种程度的泡水车影响不大。只需把车开到高地晾干即可，但如果你实在不放心，也可以去修理厂检查一遍底盘线路。");
-        pars.put("isFullPay", "1");
-        pars.put("isSecondPartyPayServiceCharge", "0");
-        pars.put("isOtherPaymentType", "1");
-        // √
-        // □
-        // ☑
+        Map pars = JSON.parseObject(paramDemo(), Map.class);
         ContractGenerator generator
-                = new ContractGenerator(HTML2, "D:/temp/assets/target.html", 1, pars);
+                = new ContractGenerator(HTML2, "D:/temp/assets", 1, pars);
         generator.generate();
     }
 
