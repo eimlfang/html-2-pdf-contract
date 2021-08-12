@@ -124,14 +124,23 @@ public abstract class ContractGenerator implements Closeable{
     protected abstract void checkPlaceholderParams();
 
     private void cleanUp() {
+        System.out.println("清空工作文件");
         File file = new File(workingDir, workingDirName);
         if (file.exists()) {
-            file.delete();
+            deleteDir(file);
         }
+    }
+
+    private void deleteDir(File file) {
+        if (file.isDirectory()) {
+            for (File f : file.listFiles()) {
+                deleteDir(f);
+            }
+        }
+        file.delete();
     }
     @Override
     public void close() throws IOException {
-        System.out.println("清空工作文件");
         cleanUp();
     }
 }
