@@ -27,6 +27,7 @@ public class PDFUtil {
             worker.parseXHtml(pdfWriter, document, html, Charset.forName("UTF-8"), new AsianFontProvider());
             document.close();
         } catch (Exception e) {
+            throw new IllegalStateException("转换PDF失败：" + e.getMessage());
         }
     }
 }

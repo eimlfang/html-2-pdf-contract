@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.itextpdf.text.DocumentException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,9 +48,11 @@ public class HelloWorld {
 
     public static void main(String[] args) throws DocumentException, IOException {
         Map pars = JSON.parseObject(paramDemo(), Map.class);
-        ContractGenerator generator
-                = new ContractGenerator(HTML2, "D:/temp/assets", 1, pars);
-        generator.generate();
+        try (ContractGenerator generator
+                     = new DefaultContractGenerator(HTML2, "D:/temp/assets", 1, pars)) {
+            File finalOutputFile = generator.generate();
+            System.out.println("最终输出文件：" + finalOutputFile.getAbsolutePath());
+        }
     }
 
 

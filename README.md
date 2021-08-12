@@ -25,8 +25,9 @@
 ```java
 public static void main(String[] args) throws DocumentException, IOException {
         Map pars = JSON.parseObject(paramDemo(), Map.class);
-        ContractGenerator generator
-                = new ContractGenerator("html源文件地址", "D:/temp/assets/target.html", 1, pars);
-        generator.generate();
-    }
+        try (ContractGenerator generator = new DefaultContractGenerator(HTML2, "D:/temp/assets", 1, pars)) {
+            File finalOutputFile = generator.generate();
+            System.out.println("最终输出文件：" + finalOutputFile.getAbsolutePath());
+        }
+}
 ```
