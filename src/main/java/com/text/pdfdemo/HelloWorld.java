@@ -26,7 +26,7 @@ public class HelloWorld {
                 "\"t_firstPartyLegalRepresentative\": \"\",\n" +
                 "\"t_firstPartyIdNum\": \"35260811112222\",\n" +
                 "\"t_firstPartyCreditCode\": \"\",\n" +
-                "\"p_firstPartyPhone\": \"15605025957\",\n" +
+                "\"p_firstPartyPhone\": \"15605020000\",\n" +
                 "\"m_sellingPrice\": \"120000\",\n" +
                 "\"p_sellingPriceCn\": \"拾贰万元整\",\n" +
                 "\"m_transferCharges\": \"20000\",\n" +
